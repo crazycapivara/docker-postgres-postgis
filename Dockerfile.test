@@ -17,14 +17,14 @@ RUN apt-get install -y --no-install-recommends \
   python3-requests
  
 # ### pgRouting
-FROM plpython AS pgrouting
+FROM postgis AS pgrouting
 ENV PGROUTING_MAJOR 2.5
 ENV PGROUTING_VERSION 2.5.2
 RUN apt-get install -y --no-install-recommends \
   postgresql-$PG_MAJOR-pgrouting
 
 # ### H3
-FROM pgrouting AS h3
+FROM postgis AS h3
 ENV BUILD_TOOLS="cmake make gcc libtool git pgxnclient postgresql-server-dev-$PG_MAJOR"
 RUN apt-get install -y --no-install-recommends $BUILD_TOOLS
 RUN pgxn install h3
