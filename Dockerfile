@@ -11,6 +11,7 @@ ENV PGROUTING_VERSION 2.5.2
 # ENV PLPYTHON_VERSION 10.6-1.pgdg18.04+1
 
 ENV BUILD_TOOLS="cmake make gcc libtool git pgxnclient postgresql-server-dev-$PG_MAJOR"
+ENV LANGUAGE_EXTENSION_R="postgresql-$PG_MAJOR-plr"
 
 RUN apt-get update \
    && apt-get install -y --no-install-recommends \
@@ -20,6 +21,7 @@ RUN apt-get update \
       python3 postgresql-plpython3-$PG_MAJOR \
       python3-requests \
       postgresql-$PG_MAJOR-pgrouting \
+      $LANGUAGE_EXTENSION_R \
       $BUILD_TOOLS
 
 RUN pgxn install h3
