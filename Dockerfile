@@ -26,6 +26,12 @@ RUN apt-get update \
 
 RUN pgxn install h3
 
+# OWM Foreign Data Wrapper
+ENV OWM_FWD_DEPS="libjson-c-dev libjson-c3 libprotobuf-c-dev protobuf-c-compiler libprotobuf-c1 zlib1g-dev zlib1g"
+
+RUN apt-get install $OWM_FWD_DEPS -y --no-install-recommends
+RUN pgxn install osm_fdw
+
 RUN apt-get purge -y --auto-remove $BUILD_TOOLS \
    && rm -rf /var/lib/apt/lists/*
 
